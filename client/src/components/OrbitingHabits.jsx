@@ -1,14 +1,14 @@
+import { useTheme } from "../context/ThemeContext.jsx";
+import { GiMeditation } from "react-icons/gi";
 import { Sparkles } from "lucide-react";
 import {
-  FaDroplet,
   FaPersonRunning,
   FaBookOpen,
   FaDumbbell,
-  FaPenNib,
+  FaDroplet,
   FaBullseye,
+  FaPenNib,
 } from "react-icons/fa6";
-import { GiMeditation } from "react-icons/gi";
-import { useTheme } from "../context/ThemeContext.jsx";
 
 const HABITS = [
   // outer orbit
@@ -16,8 +16,20 @@ const HABITS = [
   { Icon: FaPersonRunning, color: "#ef4444", orbit: "outer", delay: -10 },
   { Icon: FaBookOpen, color: "#6366f1", orbit: "outer", delay: -20 },
   // middle orbit (reverse direction)
-  { Icon: GiMeditation, color: "#8b5cf6", orbit: "middle", delay: -4, reverse: true },
-  { Icon: FaDumbbell, color: "#f59e0b", orbit: "middle", delay: -16, reverse: true },
+  {
+    Icon: GiMeditation,
+    color: "#8b5cf6",
+    orbit: "middle",
+    delay: -4,
+    reverse: true,
+  },
+  {
+    Icon: FaDumbbell,
+    color: "#f59e0b",
+    orbit: "middle",
+    delay: -16,
+    reverse: true,
+  },
   // inner orbit
   { Icon: FaPenNib, color: "#ec4899", orbit: "inner", delay: -2 },
   { Icon: FaBullseye, color: "#10b981", orbit: "inner", delay: -10 },

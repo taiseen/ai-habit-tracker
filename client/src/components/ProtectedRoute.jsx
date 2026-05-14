@@ -7,7 +7,9 @@ export default function ProtectedRoute({ children }) {
   const location = useLocation();
 
   if (loading) return <LoadingSpinner full />;
+
   if (!user)
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+
   return children;
 }

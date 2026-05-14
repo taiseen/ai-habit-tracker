@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar.jsx";
 import MobileNav from "../components/MobileNav.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import { Outlet } from "react-router-dom";
 
 export default function AppLayout() {
   return (

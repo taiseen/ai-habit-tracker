@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Heart, RefreshCw, X } from "lucide-react";
-import api from "../api/axios.js";
+import { useState } from "react";
 import Markdown from "./Markdown.jsx";
+import api from "../api/axios.js";
 
 export default function StreakRecoveryCard({ habit, onDismiss }) {
-  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
 
   const generate = async () => {
     setLoading(true);

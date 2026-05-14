@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Sparkles, Check, RefreshCw } from "lucide-react";
-import Modal from "./Modal.jsx";
+import { useState } from "react";
 import api from "../api/axios.js";
+import Modal from "./Modal.jsx";
 
 export default function HabitSuggestionModal({ open, onClose, onAccept }) {
   const [step, setStep] = useState(0);

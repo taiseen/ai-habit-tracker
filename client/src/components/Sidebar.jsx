@@ -1,21 +1,21 @@
+import { useTheme } from "../context/ThemeContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import api from "../api/axios.js";
+import Modal from "./Modal.jsx";
 import {
   LayoutDashboard,
-  ListChecks,
   CalendarDays,
-  Brain,
+  ListChecks,
   BarChart3,
-  LogOut,
   Settings,
   Sparkles,
-  Sun,
+  LogOut,
+  Brain,
   Moon,
+  Sun,
 } from "lucide-react";
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext.jsx";
-import { useTheme } from "../context/ThemeContext.jsx";
-import Modal from "./Modal.jsx";
-import api from "../api/axios.js";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -28,8 +28,9 @@ const nav = [
 export default function Sidebar() {
   const { user, logout, updateUser } = useAuth();
   const { theme, toggle } = useTheme();
-  const [settingsOpen, setSettingsOpen] = useState(false);
+
   const [morning, setMorning] = useState(user?.morningMotivation || false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [name, setName] = useState(user?.name || "");
   const [saving, setSaving] = useState(false);
 
@@ -54,7 +55,9 @@ export default function Sidebar() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
             <Sparkles size={18} />
           </div>
-          <div className="font-semibold text-lg tracking-tight">AI Habit Tracker</div>
+          <div className="font-semibold text-lg tracking-tight">
+            AI Habit Tracker
+          </div>
         </div>
       </div>
 
@@ -64,9 +67,10 @@ export default function Sidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition ${isActive
-                ? "bg-gradient-to-r from-brand-500/15 to-brand-500/5 text-brand-700 dark:text-brand-300 ring-1 ring-brand-500/20"
-                : "text-soft hover:bg-[var(--surface-hover)]"
+              `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition ${
+                isActive
+                  ? "bg-gradient-to-r from-brand-500/15 to-brand-500/5 text-brand-700 dark:text-brand-300 ring-1 ring-brand-500/20"
+                  : "text-soft hover:bg-[var(--surface-hover)]"
               }`
             }
           >
@@ -136,7 +140,7 @@ export default function Sidebar() {
             <div>
               <div className="text-sm font-medium">Morning motivation</div>
               <div className="text-xs text-faint">
-                Show a short personalised AI message every morning on the
+                Show a short personalized AI message every morning on the
                 dashboard.
               </div>
             </div>

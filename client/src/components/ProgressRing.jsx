@@ -18,6 +18,7 @@ export default function ProgressRing({
           <stop offset="100%" stopColor="#d97706" />
         </linearGradient>
       </defs>
+
       <circle
         className="ring-bg"
         cx={size / 2}
@@ -26,6 +27,7 @@ export default function ProgressRing({
         fill="none"
         strokeWidth={stroke}
       />
+
       <circle
         cx={size / 2}
         cy={size / 2}

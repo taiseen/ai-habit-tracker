@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
 import { MessageCircle, Send, X, Sparkles, RefreshCw } from "lucide-react";
-import api from "../api/axios.js";
+import { useState, useEffect, useRef } from "react";
 import Markdown from "./Markdown.jsx";
+import api from "../api/axios.js";
 
 const SAMPLES = [
   "Which day of the week am I most consistent?",
@@ -18,8 +18,9 @@ export default function AIChat() {
         "Hi — ask me anything about your habit data. Try one of the examples below.",
     },
   ]);
-  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState("");
+
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -91,10 +92,15 @@ export default function AIChat() {
                       : "glass rounded-bl-md"
                   }`}
                 >
-                  {m.role === "user" ? m.content : <Markdown>{m.content}</Markdown>}
+                  {m.role === "user" ? (
+                    m.content
+                  ) : (
+                    <Markdown>{m.content}</Markdown>
+                  )}
                 </div>
               </div>
             ))}
+
             {loading && (
               <div className="flex justify-start">
                 <div className="glass rounded-2xl rounded-bl-md px-3.5 py-2.5 text-sm text-soft flex items-center gap-2">
@@ -103,6 +109,7 @@ export default function AIChat() {
                 </div>
               </div>
             )}
+
             {messages.length === 1 && (
               <div className="pt-2 space-y-1.5">
                 {SAMPLES.map((s, i) => (

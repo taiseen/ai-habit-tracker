@@ -1,12 +1,12 @@
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
 import { useTheme } from "../context/ThemeContext.jsx";
+import {
+  ResponsiveContainer,
+  PieChart,
+  Tooltip,
+  Legend,
+  Cell,
+  Pie,
+} from "recharts";
 
 const COLORS = [
   "#6366f1",
@@ -22,6 +22,7 @@ const COLORS = [
 
 export default function CategoryPieChart({ data }) {
   const { theme } = useTheme();
+
   return (
     <div className="card p-5">
       <div className="text-sm font-medium mb-3">Completions by category</div>
@@ -45,12 +46,17 @@ export default function CategoryPieChart({ data }) {
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>
+
               <Tooltip
                 contentStyle={{
                   background:
-                    theme === "dark" ? "rgba(20,20,36,0.95)" : "rgba(255,255,255,0.95)",
+                    theme === "dark"
+                      ? "rgba(20,20,36,0.95)"
+                      : "rgba(255,255,255,0.95)",
                   border: `1px solid ${
-                    theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(15,15,27,0.08)"
+                    theme === "dark"
+                      ? "rgba(255,255,255,0.1)"
+                      : "rgba(15,15,27,0.08)"
                   }`,
                   borderRadius: 12,
                   fontSize: 12,

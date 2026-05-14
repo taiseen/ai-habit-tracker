@@ -1,5 +1,5 @@
-import { useMemo } from "react";
 import { format, parseISO } from "date-fns";
+import { useMemo } from "react";
 
 const levelColor = (count, max) => {
   if (!count) return "var(--heat-0)";
@@ -75,7 +75,7 @@ export default function HeatmapChart({ data = [] }) {
                   />
                 ) : (
                   <div key={ri} className="w-3.5 h-3.5" />
-                )
+                ),
               )}
             </div>
           ))}

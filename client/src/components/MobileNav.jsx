@@ -1,17 +1,17 @@
+import { useTheme } from "../context/ThemeContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
-  ListChecks,
   CalendarDays,
-  Brain,
+  ListChecks,
   BarChart3,
   Sparkles,
   LogOut,
-  Sun,
+  Brain,
   Moon,
+  Sun,
 } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
-import { useTheme } from "../context/ThemeContext.jsx";
 
 export default function MobileNav() {
   const { user, logout } = useAuth();
@@ -56,9 +56,8 @@ export default function MobileNav() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-lg text-xs ${isActive
-                ? "text-brand-700 dark:text-brand-300"
-                : "text-faint"
+              `flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-lg text-xs ${
+                isActive ? "text-brand-700 dark:text-brand-300" : "text-faint"
               }`
             }
           >

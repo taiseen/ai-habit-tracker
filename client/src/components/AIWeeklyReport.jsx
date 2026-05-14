@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { Sparkles, ChevronDown, RefreshCw } from "lucide-react";
-import api from "../api/axios.js";
+import { useState } from "react";
 import Markdown from "./Markdown.jsx";
+import api from "../api/axios.js";
 
 export default function AIWeeklyReport() {
-  const [expanded, setExpanded] = useState(false);
-  const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
   const [generatedAt, setGeneratedAt] = useState(null);
+  const [expanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
 
   const generate = async () => {
     setLoading(true);

@@ -2,8 +2,8 @@ import { weekKeys } from "../utils/dateHelpers.js";
 import { Check } from "lucide-react";
 
 export default function WeeklyGrid({ habits, logsByHabit, days: customDays }) {
-  const days = customDays || weekKeys();
   const todayKey = new Date().toISOString().slice(0, 10);
+  const days = customDays || weekKeys();
 
   if (!habits.length) {
     return (

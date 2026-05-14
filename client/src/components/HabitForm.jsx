@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { CATEGORIES, COLORS, ICONS } from "../utils/constants.js";
+import { useState } from "react";
 
 export default function HabitForm({ initial, onSubmit, onCancel, submitting }) {
   const [form, setForm] = useState({

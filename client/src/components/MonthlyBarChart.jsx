@@ -1,18 +1,21 @@
+import { useTheme } from "../context/ThemeContext.jsx";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
   ResponsiveContainer,
   CartesianGrid,
+  BarChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+  Bar,
 } from "recharts";
-import { useTheme } from "../context/ThemeContext.jsx";
 
 export default function MonthlyBarChart({ data }) {
   const { theme } = useTheme();
-  const grid = theme === "dark" ? "rgba(255,255,255,0.08)" : "rgba(15,15,27,0.08)";
+
   const tick = theme === "dark" ? "#8a8aa0" : "#6b6b78";
+  const grid =
+    theme === "dark" ? "rgba(255,255,255,0.08)" : "rgba(15,15,27,0.08)";
+
   return (
     <div className="card p-5">
       <div className="text-sm font-medium mb-3">Last 30 days</div>
@@ -26,6 +29,7 @@ export default function MonthlyBarChart({ data }) {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke={grid} />
+
             <XAxis
               dataKey="label"
               tick={{ fontSize: 11, fill: tick }}
@@ -33,16 +37,26 @@ export default function MonthlyBarChart({ data }) {
               tickLine={false}
               interval={3}
             />
+
             <YAxis
               tick={{ fontSize: 12, fill: tick }}
               axisLine={false}
               tickLine={false}
               allowDecimals={false}
             />
+
             <Tooltip
-              cursor={{ fill: theme === "dark" ? "rgba(255,255,255,0.04)" : "rgba(15,15,27,0.04)" }}
+              cursor={{
+                fill:
+                  theme === "dark"
+                    ? "rgba(255,255,255,0.04)"
+                    : "rgba(15,15,27,0.04)",
+              }}
               contentStyle={{
-                background: theme === "dark" ? "rgba(20,20,36,0.95)" : "rgba(255,255,255,0.95)",
+                background:
+                  theme === "dark"
+                    ? "rgba(20,20,36,0.95)"
+                    : "rgba(255,255,255,0.95)",
                 border: `1px solid ${grid}`,
                 borderRadius: 12,
                 fontSize: 12,
@@ -50,6 +64,7 @@ export default function MonthlyBarChart({ data }) {
                 backdropFilter: "blur(12px)",
               }}
             />
+
             <Bar dataKey="count" fill="url(#monbar)" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
