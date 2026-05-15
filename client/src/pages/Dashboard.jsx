@@ -1,38 +1,39 @@
+import { streakFromKeys, todayKey, weekKeys } from "../utils/dateHelpers.js";
+import { celebrate, celebrateBig } from "../utils/confetti.js";
+import { useAuth } from "../context/AuthContext.jsx";
 import { useEffect, useMemo, useState } from "react";
 import { Plus, Sparkles } from "lucide-react";
-import api from "../api/axios.js";
-import Modal from "../components/Modal.jsx";
-import HabitForm from "../components/HabitForm.jsx";
-import TodayHabitCard from "../components/TodayHabitCard.jsx";
-import WeeklyGrid from "../components/WeeklyGrid.jsx";
-import HeatmapChart from "../components/HeatmapChart.jsx";
-import SummaryCards from "../components/SummaryCards.jsx";
-import AIWeeklyReport from "../components/AIWeeklyReport.jsx";
-import MorningMotivation from "../components/MorningMotivation.jsx";
 import HabitSuggestionModal from "../components/HabitSuggestionModal.jsx";
 import StreakRecoveryCard from "../components/StreakRecoveryCard.jsx";
-import ProgressRing from "../components/ProgressRing.jsx";
+import MorningMotivation from "../components/MorningMotivation.jsx";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import { celebrate, celebrateBig } from "../utils/confetti.js";
-import { streakFromKeys, todayKey, weekKeys } from "../utils/dateHelpers.js";
-import { useAuth } from "../context/AuthContext.jsx";
+import AIWeeklyReport from "../components/AIWeeklyReport.jsx";
+import TodayHabitCard from "../components/TodayHabitCard.jsx";
+import HeatmapChart from "../components/HeatmapChart.jsx";
+import SummaryCards from "../components/SummaryCards.jsx";
+import ProgressRing from "../components/ProgressRing.jsx";
+import WeeklyGrid from "../components/WeeklyGrid.jsx";
+import HabitForm from "../components/HabitForm.jsx";
+import Modal from "../components/Modal.jsx";
+import api from "../api/axios.js";
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const [habits, setHabits] = useState([]);
+
+  const [allLogsByHabit, setAllLogsByHabit] = useState({});
   const [todayLogs, setTodayLogs] = useState([]);
   const [weekLogs, setWeekLogs] = useState([]);
   const [heatmap, setHeatmap] = useState([]);
-  const [allLogsByHabit, setAllLogsByHabit] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  const [formOpen, setFormOpen] = useState(false);
-  const [editing, setEditing] = useState(null);
+  const [habits, setHabits] = useState([]);
+  
   const [submitting, setSubmitting] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(null);
 
-  const [suggestOpen, setSuggestOpen] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState(null);
   const [recoveryHabit, setRecoveryHabit] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [suggestOpen, setSuggestOpen] = useState(false);
 
   const loadAll = async () => {
     setLoading(true);

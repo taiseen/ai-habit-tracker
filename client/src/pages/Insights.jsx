@@ -1,35 +1,35 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  Sparkles,
-  RefreshCw,
-  Brain,
-  Trophy,
-  CalendarRange,
-  Activity,
-  TrendingUp,
-  TrendingDown,
-  Minus,
-} from "lucide-react";
-import { format, subDays } from "date-fns";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-  Cell as PieCell,
-} from "recharts";
-import api from "../api/axios.js";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import Markdown from "../components/Markdown.jsx";
+import api from "../api/axios.js";
 import { weekKeysFor, streakFromKeys } from "../utils/dateHelpers.js";
 import { useTheme } from "../context/ThemeContext.jsx";
+import { useEffect, useMemo, useState } from "react";
+import { format, subDays } from "date-fns";
+import {
+  CalendarRange,
+  TrendingDown,
+  TrendingUp,
+  RefreshCw,
+  Activity,
+  Sparkles,
+  Trophy,
+  Minus,
+  Brain,
+} from "lucide-react";
+import {
+  ResponsiveContainer,
+  CartesianGrid,
+  PieChart,
+  Legend,
+  BarChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+  Cell,
+  Bar,
+  Pie,
+  Cell as PieCell,
+} from "recharts";
 
 const PIE_COLORS = [
   "#f59e0b",
@@ -59,14 +59,14 @@ export default function Insights() {
     backdropFilter: "blur(12px)",
   };
 
+  const [report, setReport] = useState("");
   const [habits, setHabits] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const [report, setReport] = useState("");
+  
   const [reportGeneratedAt, setReportGeneratedAt] = useState(null);
   const [reportLoading, setReportLoading] = useState(false);
-
+  const [loading, setLoading] = useState(true);
+  
   const thisWeek = useMemo(() => weekKeysFor(new Date()), []);
   const lastWeek = useMemo(
     () => weekKeysFor(subDays(new Date(), 7)),

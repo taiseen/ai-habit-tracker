@@ -1,17 +1,20 @@
-import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Sparkles, Sun, Moon } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
 import { useTheme } from "../context/ThemeContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { Sparkles, Sun, Moon } from "lucide-react";
+import { useState } from "react";
 
 export default function Register() {
+  const navigate = useNavigate();
+  
   const { user, register } = useAuth();
   const { theme, toggle } = useTheme();
-  const navigate = useNavigate();
+  
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [err, setErr] = useState("");
+  
   const [loading, setLoading] = useState(false);
-
+  
   if (user) return <Navigate to="/dashboard" replace />;
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });

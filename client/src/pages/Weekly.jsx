@@ -1,16 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { format, addWeeks, isSameWeek } from "date-fns";
-import api from "../api/axios.js";
-import WeeklyGrid from "../components/WeeklyGrid.jsx";
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import { weekKeysFor } from "../utils/dateHelpers.js";
+import { useEffect, useMemo, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import WeeklyGrid from "../components/WeeklyGrid.jsx";
+import api from "../api/axios.js";
 
 export default function Weekly() {
   const [cursor, setCursor] = useState(new Date());
+  const [loading, setLoading] = useState(true);
+
   const [habits, setHabits] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const days = useMemo(() => weekKeysFor(cursor), [cursor]);
   const isCurrentWeek = isSameWeek(cursor, new Date(), { weekStartsOn: 1 });
@@ -81,7 +82,8 @@ export default function Weekly() {
           </button>
           <div className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl glass text-sm font-medium">
             <CalendarDays size={14} className="text-muted" />
-            {format(days[0].date, "MMM d")} — {format(days[6].date, "MMM d, yyyy")}
+            {format(days[0].date, "MMM d")} —{" "}
+            {format(days[6].date, "MMM d, yyyy")}
           </div>
           <button
             className="btn-secondary px-3"
@@ -92,10 +94,7 @@ export default function Weekly() {
             <ChevronRight size={16} />
           </button>
           {!isCurrentWeek && (
-            <button
-              className="btn-ghost"
-              onClick={() => setCursor(new Date())}
-            >
+            <button className="btn-ghost" onClick={() => setCursor(new Date())}>
               Today
             </button>
           )}
@@ -109,9 +108,7 @@ export default function Weekly() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="card p-4">
               <div className="text-xs text-muted font-medium">Week rate</div>
-              <div className="text-2xl font-semibold mt-1">
-                {weekRate}%
-              </div>
+              <div className="text-2xl font-semibold mt-1">{weekRate}%</div>
               <div className="text-xs text-muted mt-0.5">
                 {totalDone} of {totalSlots}
               </div>
@@ -120,9 +117,7 @@ export default function Weekly() {
               <div className="text-xs text-muted font-medium">
                 Total completions
               </div>
-              <div className="text-2xl font-semibold mt-1">
-                {totalDone}
-              </div>
+              <div className="text-2xl font-semibold mt-1">{totalDone}</div>
               <div className="text-xs text-muted mt-0.5">this week</div>
             </div>
             <div className="card p-4">
@@ -135,9 +130,7 @@ export default function Weekly() {
               </div>
             </div>
             <div className="card p-4">
-              <div className="text-xs text-muted font-medium">
-                Top habit
-              </div>
+              <div className="text-xs text-muted font-medium">Top habit</div>
               <div className="text-2xl font-semibold mt-1 truncate">
                 {topHabit?.count ? (
                   <>
@@ -165,11 +158,7 @@ export default function Weekly() {
               </div>
             </div>
           ) : (
-            <WeeklyGrid
-              habits={habits}
-              logsByHabit={logsByHabit}
-              days={days}
-            />
+            <WeeklyGrid habits={habits} logsByHabit={logsByHabit} days={days} />
           )}
         </>
       )}

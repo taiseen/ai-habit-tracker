@@ -1,38 +1,38 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  Plus,
-  Search,
-  Archive,
-  Pencil,
-  Trash2,
-  Flame,
-  Trophy,
-  ArchiveRestore,
-  Sparkles,
-} from "lucide-react";
-import api from "../api/axios.js";
-import Modal from "../components/Modal.jsx";
-import HabitForm from "../components/HabitForm.jsx";
 import HabitSuggestionModal from "../components/HabitSuggestionModal.jsx";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import { CATEGORIES } from "../utils/constants.js";
+import HabitForm from "../components/HabitForm.jsx";
+import Modal from "../components/Modal.jsx";
+import api from "../api/axios.js";
 import { streakFromKeys } from "../utils/dateHelpers.js";
+import { useEffect, useMemo, useState } from "react";
+import { CATEGORIES } from "../utils/constants.js";
 import { format, subDays } from "date-fns";
+import {
+  ArchiveRestore,
+  Sparkles,
+  Archive,
+  Search,
+  Pencil,
+  Trash2,
+  Trophy,
+  Flame,
+  Plus,
+} from "lucide-react";
 
 export default function Habits() {
-  const [habits, setHabits] = useState([]);
   const [logsByHabit, setLogsByHabit] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [habits, setHabits] = useState([]);
+
+  const [category, setCategory] = useState("All");
+  const [query, setQuery] = useState("");
 
   const [showArchived, setShowArchived] = useState(false);
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("All");
-
-  const [formOpen, setFormOpen] = useState(false);
-  const [editing, setEditing] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [suggestOpen, setSuggestOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [suggestOpen, setSuggestOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(null);
 
   const load = async () => {
     setLoading(true);
@@ -83,7 +83,9 @@ export default function Habits() {
     try {
       if (editing) {
         const res = await api.put(`/habits/${editing._id}`, data);
-        setHabits((hs) => hs.map((h) => (h._id === res.data._id ? res.data : h)));
+        setHabits((hs) =>
+          hs.map((h) => (h._id === res.data._id ? res.data : h)),
+        );
       } else {
         const res = await api.post("/habits", data);
         setHabits((hs) => [...hs, res.data]);
@@ -210,15 +212,15 @@ export default function Habits() {
             {showArchived
               ? "Nothing archived"
               : habits.length === 0
-              ? "No habits yet"
-              : "No habits match your filter"}
+                ? "No habits yet"
+                : "No habits match your filter"}
           </div>
           <div className="text-sm text-muted mt-1">
             {showArchived
               ? "Archived habits keep their history but stay out of your daily list."
               : habits.length === 0
-              ? "Start small — something you can do in under 5 minutes."
-              : "Try clearing your search or category filter."}
+                ? "Start small — something you can do in under 5 minutes."
+                : "Try clearing your search or category filter."}
           </div>
           {!showArchived && habits.length === 0 && (
             <button

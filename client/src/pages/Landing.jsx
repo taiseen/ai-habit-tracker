@@ -1,19 +1,19 @@
+import OrbitingHabits from "../components/OrbitingHabits.jsx";
+import { useTheme } from "../context/ThemeContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 import { Link, Navigate } from "react-router-dom";
 import {
-  Sparkles,
-  Flame,
-  BarChart3,
-  Brain,
   CheckCircle2,
   ArrowRight,
-  Target,
+  BarChart3,
   Activity,
-  Sun,
+  Sparkles,
+  Target,
+  Flame,
+  Brain,
   Moon,
+  Sun,
 } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
-import { useTheme } from "../context/ThemeContext.jsx";
-import OrbitingHabits from "../components/OrbitingHabits.jsx";
 
 const features = [
   {
@@ -41,6 +41,7 @@ const features = [
 export default function Landing() {
   const { user } = useAuth();
   const { theme, toggle } = useTheme();
+
   if (user) return <Navigate to="/dashboard" replace />;
 
   return (
@@ -118,8 +119,9 @@ export default function Landing() {
               ].map((h, i) => (
                 <div
                   key={i}
-                  className={`flex items-center gap-3 rounded-xl glass p-3 ${h.done ? "ring-1 ring-brand-500/30" : ""
-                    }`}
+                  className={`flex items-center gap-3 rounded-xl glass p-3 ${
+                    h.done ? "ring-1 ring-brand-500/30" : ""
+                  }`}
                 >
                   <span className="w-9 h-9 rounded-lg bg-brand-500/15 flex items-center justify-center">
                     {h.icon}
@@ -130,10 +132,11 @@ export default function Landing() {
                     {h.streak}
                   </div>
                   <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center ${h.done
-                      ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-md shadow-brand-500/30"
-                      : "border-2 border-[var(--surface-border)]"
-                      }`}
+                    className={`w-7 h-7 rounded-full flex items-center justify-center ${
+                      h.done
+                        ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-md shadow-brand-500/30"
+                        : "border-2 border-[var(--surface-border)]"
+                    }`}
                   >
                     {h.done && <CheckCircle2 size={14} />}
                   </div>

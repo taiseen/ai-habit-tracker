@@ -1,18 +1,20 @@
-import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { Sparkles, Sun, Moon } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
 import { useTheme } from "../context/ThemeContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { Sparkles, Sun, Moon } from "lucide-react";
+import { useState } from "react";
 
 export default function Login() {
-  const { user, login } = useAuth();
   const { theme, toggle } = useTheme();
-  const loc = useLocation();
+  const { user, login } = useAuth();
+
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [err, setErr] = useState("");
+  const loc = useLocation();
+
   const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [err, setErr] = useState("");
 
   if (user) return <Navigate to="/dashboard" replace />;
 
@@ -41,10 +43,7 @@ export default function Login() {
       </button>
 
       <div className="w-full max-w-md">
-        <Link
-          to="/"
-          className="flex items-center justify-center gap-2 mb-6"
-        >
+        <Link to="/" className="flex items-center justify-center gap-2 mb-6">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
             <Sparkles size={18} />
           </div>
@@ -97,7 +96,10 @@ export default function Login() {
 
           <div className="text-center mt-5 text-sm text-soft">
             Don't have an account?{" "}
-            <Link to="/register" className="text-brand-600 dark:text-brand-300 font-medium">
+            <Link
+              to="/register"
+              className="text-brand-600 dark:text-brand-300 font-medium"
+            >
               Create one
             </Link>
           </div>
