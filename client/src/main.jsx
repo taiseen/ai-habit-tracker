@@ -1,9 +1,9 @@
-import { ThemeProvider } from "./context/ThemeContext.jsx";
-import { AuthProvider } from "./context/AuthContext.jsx";
-import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import { AuthProvider } from "./context/AuthContext";
+import { RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import App from "./App.jsx";
+import router from "./router";
 import "./styles/index.css";
 
 const htmlRoot = document.getElementById("root");
@@ -11,12 +11,10 @@ const reactRoot = createRoot(htmlRoot);
 
 reactRoot.render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>,
 );
